@@ -24,8 +24,8 @@
                 <span class="uppercase text-blue-500 font-bold italic text-xs">
                     Founded: {{$car->founded}}
                 </span>
-                <h2 class="text-gray-700 text-5xl">
-                    {{$car->name}}
+                <h2 class="text-gray-700 text-5xl hover:text-green-200">
+                    <a href="/rides/{{$car->id}}">{{$car->name}}</a>
                 </h2>
                 <p class="text-lg text-gray-500 py-6">
                    {{$car->description}}

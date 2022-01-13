@@ -8,9 +8,12 @@
             </h1>
         </div>
         <div class="flex justify-center pt-40">
-            <form action="/rides" method="POST">
+            <form action="/rides" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="block">
+                    <input type="file" 
+                    class="block shadow-5xl mb-10 p-2 w-80  italic placeholder-gray-400" 
+                    name="image">
                     <input type="text" 
                     class="block shadow-5xl mb-10 p-2 w-80  italic placeholder-gray-400" 
                     name="name" placeholder="brand name..">
@@ -25,6 +28,16 @@
                     </button>
                 </div>
             </form>
+           
         </div>
     </div>
+     @if ($errors->any())
+                <div class="w-4/8 m-auto text-center">
+                    @foreach ($errors->all() as $error)
+                        <li class="text-red-400 list-none">
+                            {{$error}}
+                        </li>
+                    @endforeach
+                </div>
+            @endif
 @endsection

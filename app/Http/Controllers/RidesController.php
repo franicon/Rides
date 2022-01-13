@@ -17,6 +17,7 @@ class RidesController extends Controller
         $cars = Ride::all();
 
         
+        
         return view('rides.index',[
             'cars' => $cars
         ]);
@@ -30,6 +31,7 @@ class RidesController extends Controller
     public function create()
     {
         return view('rides.create');
+        
     }
 
     /**
@@ -40,17 +42,22 @@ class RidesController extends Controller
      */
     public function store(Request $request)
     {
-        // $car = new Ride;
-        // $car->name = $request->input('name');
-        // $car->founded = $request->input('founded');
-        // $car->description =  $request->input('description');
-        // $car->save();
 
-        $car = Ride::create([
-            'name' => $request->input('name'),
-            'founded' =>$request->input('founded'),
-            'description'=>$request->input('description'),
-        ]);
+       $request->validate([
+           'image' => 'required|mimes:jpg,png,jpeg|max:2000'
+       ]);
+    
+        $car = new Ride;
+        $car->name = $request->input('name');
+        $car->founded = $request->input('founded');
+        $car->description =  $request->input('description');
+        $car->save();
+
+        // $car = Ride::create([
+        //     'name' => $request->input('name'),
+        //     'founded' =>$request->input('founded'),
+        //     'description'=>$request->input('description'),
+        // ]);
         
         return redirect('/rides');
     }
@@ -63,7 +70,9 @@ class RidesController extends Controller
      */
     public function show($id)
     {
-        //
+       $car = Ride::find($id);
+       
+       return view('rides.show')->with('car', $car);
     }
 
     /**
